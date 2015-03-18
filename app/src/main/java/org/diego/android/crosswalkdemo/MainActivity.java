@@ -3,8 +3,10 @@ package org.diego.android.crosswalkdemo;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 
+import org.xwalk.core.JavascriptInterface;
 import org.xwalk.core.XWalkPreferences;
 import org.xwalk.core.XWalkView;
+import org.xwalk.core.internal.XWalkSettings;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -16,10 +18,11 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
 
         xWalkWebView=(XWalkView)findViewById(R.id.xwalkWebView);
-        xWalkWebView.load("https://crosswalk-project.org", null);
-
-        // turn on debugging
+        xWalkWebView.load("file:///android_asset/index.html", null);
+        xWalkWebView.addJavascriptInterface(new jsinterface(),"jsint");
+        // turn on debugging//
         XWalkPreferences.setValue(XWalkPreferences.REMOTE_DEBUGGING, true);
+
     }
 
     @Override
